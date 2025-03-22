@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <title>These / Those 학습 프로그램</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      max-width: 800px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .level {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .question {
+      margin: 10px 0;
+    }
+    .question p {
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .question input {
+      width: 80%;
+      padding: 6px;
+      font-size: 1rem;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+    .btn-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>These / Those 학습 프로그램</h1>
+  <p style="text-align:center;">Level 1과 Level 2의 문제를 풀고, 채점을 받아보세요.</p>
+
+  <!-- 레벨 1 영역 -->
+  <div class="level" id="level1">
+    <h2>Level 1</h2>
+
+    <!-- Q1 -->
+    <div class="question">
+      <p>1) Fill in the blank: <br> "_______ are my new books." (이것들은 나의 새 책들이야.)</p>
+      <input type="text" id="q1" placeholder="정답을 입력하세요 (These/Those)"/>
+      <div class="result" id="r1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question">
+      <p>2) Fill in the blank: <br> "_______ shoes over there are very big." (저기 있는 저 신발들은 정말 크다.)</p>
+      <input type="text" id="q2" placeholder="정답을 입력하세요 (These/Those)"/>
+      <div class="result" id="r2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question">
+      <p>3) Multiple Choice: <br> "(These / Those) notebooks here are for our science class." <br> 올바른 단어를 입력하세요.</p>
+      <input type="text" id="q3" placeholder="정답을 입력하세요 (These/Those)"/>
+      <div class="result" id="r3"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question">
+      <p>4) Multiple Choice: <br> "(These / Those) animals in the distance are zebras." <br> 올바른 단어를 입력하세요.</p>
+      <input type="text" id="q4" placeholder="정답을 입력하세요 (These/Those)"/>
+      <div class="result" id="r4"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question">
+      <p>5) Fill in the blank: <br> "_______ candies in my hand are sour." (내 손에 있는 이 사탕들은 시다.)</p>
+      <input type="text" id="q5" placeholder="정답을 입력하세요 (These/Those)"/>
+      <div class="result" id="r5"></div>
+    </div>
+
+    <div class="btn-container">
+      <button onclick="checkLevel1()">채점하기 (Level 1)</button>
+    </div>
+  </div>
+
+  <!-- 레벨 2 영역 -->
+  <div class="level" id="level2">
+    <h2>Level 2</h2>
+
+    <!-- Q6 -->
+    <div class="question">
+      <p>6) 다음 문장을 한국어로 번역하세요 (정확한 문장으로 입력):<br> "These apples are very sweet."</p>
+      <input type="text" id="q6" placeholder="정답을 입력하세요"/>
+      <div class="result" id="r6"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question">
+      <p>7) 다음 문장을 한국어로 번역하세요 (정확한 문장으로 입력):<br> "Those mountains look really tall."</p>
+      <input type="text" id="q7" placeholder="정답을 입력하세요"/>
+      <div class="result" id="r7"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question">
+      <p>8) Fill in the blank: <br> "_______ are my favorite pencils near me." (내 가까이에 있는 연필들을 가리키며: 이것들은 내가 가장 좋아하는 연필들이야.)</p>
+      <input type="text" id="q8" placeholder="정답을 입력하세요 (These/Those)"/>
+      <div class="result" id="r8"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question">
+      <p>9) Fill in the blank: <br> "Do you see ______ stars far away in the sky?" (하늘 멀리 있는 저 별들 보이니?)</p>
+      <input type="text" id="q9" placeholder="정답을 입력하세요 (These/Those)"/>
+      <div class="result" id="r9"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question">
+      <p>10) 다음 한국어 문장을 영어로 바꿔 보세요 (정확하게 입력):<br> "이것들은 매우 부드러운 담요들입니다."</p>
+      <input type="text" id="q10" placeholder="정답을 입력하세요"/>
+      <div class="result" id="r10"></div>
+    </div>
+
+    <div class="btn-container">
+      <button onclick="checkLevel2()">채점하기 (Level 2)</button>
+    </div>
+  </div>
+
+  <script>
+    // Level 1 정답 배열
+    // 대소문자 구분이 필요하다면 toLowerCase() 등을 사용할 수도 있습니다.
+    const level1Answers = [
+      "these", // Q1
+      "those", // Q2
+      "these", // Q3
+      "those", // Q4
+      "these"  // Q5
+    ];
+
+    // Level 2 정답 배열
+    // 일부 번역은 정확한 문장으로 제한. 다만 실제 시험에서는 여러 표현이 있을 수 있습니다.
+    // 여기서는 단순하게 일치 여부를 확인하기 위해 예시 정답을 고정함.
+    const level2Answers = [
+      "이 사과들은 매우 달아요.", // Q6
+      "저 산들은 정말 높아 보여요.", // Q7
+      "these", // Q8
+      "those", // Q9
+      "These are very soft blankets." // Q10
+    ];
+
+    // Level 1 채점
+    function checkLevel1() {
+      for (let i = 1; i <= 5; i++) {
+        const userInput = document.getElementById(`q${i}`).value.trim().toLowerCase();
+        const correctAnswer = level1Answers[i-1];
+        const resultEl = document.getElementById(`r${i}`);
+        if (userInput === correctAnswer) {
+          resultEl.textContent = "정답입니다!";
+          resultEl.className = "result correct";
+        } else {
+          resultEl.textContent = `오답입니다. 정답: ${correctAnswer}`;
+          resultEl.className = "result incorrect";
+        }
+      }
+    }
+
+    // Level 2 채점
+    // 번역 문항은 문자열이 정확히 일치해야만 정답 처리
+    // (실무에서 번역 문제에는 여러 정답이 있을 수 있으므로 참고)
+    function checkLevel2() {
+      for (let i = 6; i <= 10; i++) {
+        const userInput = document.getElementById(`q${i}`).value.trim();
+        const correctAnswer = level2Answers[i-6];
+        const resultEl = document.getElementById(`r${i}`);
+        // 대소문자 구분 필요 여부를 구분해 주어야 함
+        // 번역 문장은 그대로 비교, these/those 문항은 소문자로 비교
+        if (i === 8 || i === 9) {
+          // these/those 문제
+          if (userInput.toLowerCase() === correctAnswer) {
+            resultEl.textContent = "정답입니다!";
+            resultEl.className = "result correct";
+          } else {
+            resultEl.textContent = `오답입니다. 정답: ${correctAnswer}`;
+            resultEl.className = "result incorrect";
+          }
+        } else {
+          // 번역 문제 or 문장 문제
+          if (userInput === correctAnswer) {
+            resultEl.textContent = "정답입니다!";
+            resultEl.className = "result correct";
+          } else {
+            resultEl.textContent = `오답입니다. 정답: ${correctAnswer}`;
+            resultEl.className = "result incorrect";
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
